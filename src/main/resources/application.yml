@@ -1,0 +1,9 @@
+server:
+  port: 9521 #项目端口
+
+
+logging:
+  level.root: info
+  level.com.stylefeng: debug
+  path: logs/
+  file: audio.log
