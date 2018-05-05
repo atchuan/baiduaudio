@@ -31,7 +31,7 @@ public class AudioController {
             e.printStackTrace();
         }
         HashMap<String,Object> options = new HashMap<String, Object>();
-        options.put("dev_pid",1836);
+        options.put("dev_pid",1837);
         return AudioClient.getInstace().asr(bytes,"pcm",16000,options).toString();
     }
 

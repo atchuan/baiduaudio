@@ -1,6 +1,11 @@
 server:
   port: 9521 #项目端口
 
+spring:
+  http:
+    multipart:
+    #  location: E:/data/temp #本地临时文件存储路径，必须事先创建好
+      location: /home/data/temp #服务器临时文件存储路径，必须事先创建好
 
 logging:
   level.root: info

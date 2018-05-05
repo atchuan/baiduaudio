@@ -8,7 +8,7 @@
 	var HZRecorder = function(stream, config) {
 		config = config || {};
 		config.sampleBits = config.sampleBits || 16; // 采样数位 8, 16
-		config.sampleRate = config.sampleRate || 16000; // 采样率(1/6 44100)
+		config.sampleRate = config.sampleRate || 8000; // 采样率(1/6 48000)
 
 		// 创建一个音频环境对象
 		audioContext = window.AudioContext || window.webkitAudioContext;
@@ -67,8 +67,8 @@
 						this.oututSampleBits);
 				var bytes = this.compress();
 				var dataLength = bytes.length * (sampleBits / 8);
-				var buffer = new ArrayBuffer(44 + dataLength);
-				var data = new DataView(buffer);
+				var bufferArray = new ArrayBuffer(44 + dataLength);
+				var data = new DataView(bufferArray);
 
 				var channelCount = 1;// 单声道
 				var offset = 0;
@@ -165,8 +165,8 @@
 		
 		//清除缓存
 		this.clear = function(){
-			this.size = 0;
-			this.buffer = [];
+			audioData.size = 0;
+			audioData.buffer = [];
 		}
 		// 上传
 		this.upload = function(url, callback) {
