@@ -67,14 +67,25 @@
     __log('停止录音。');
     
     // create WAV download link using audio data blob
-    createDownloadLink();
+    createDownloadLink2();
   }
-
+  //获取地址参数
+  function getQueryString(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return unescape(r[2]);
+      return null;
+  }
   //上传
   function uploadRecording(button){
     button.disabled = true;
-     __log('上传录音。');
-    recorder.upload("/audio/save", function (state, e) {
+    __log('上传录音。');
+    var path = "/audio/save";
+    var language = getQueryString("language");
+    if(language){
+      path += "?language="+language;
+    }
+    recorder.upload(path, function (state, e) {
       switch (state) {
           case 'uploading':
               //var percentComplete = Math.round(e.loaded * 100 / e.total) + '%';
@@ -99,23 +110,27 @@
               button.disabled = false;
               break;
       }
-  });
+    });
   }
-  //创建wav下载链接
+  //创建wav下载链接-列表
   function createDownloadLink() {
     var url = URL.createObjectURL(recorder.getBlob());
 	var li = document.createElement('li');
     var au = document.createElement('audio');
-   //var hf = document.createElement('a');
-
     au.controls = true;
     au.src = url;
-    //hf.href = url;
-    //hf.download = new Date().toISOString() + '.wav';
-    //hf.innerHTML = hf.download;
     li.appendChild(au);
-    //li.appendChild(hf);
     recordingslist.appendChild(li);
+  }
+  //创建wav下载链接-单个（覆盖以前的）
+  function createDownloadLink2() {
+    var url = URL.createObjectURL(recorder.getBlob());
+	var li = document.createElement('li');
+    var au = document.createElement('audio');
+    au.controls = true;
+    au.src = url;
+    li.appendChild(au);
+    recordingslist.innerHTML = li.outerHTML;
   }
   //显示语音识别内容
   function showRecognition(text){
