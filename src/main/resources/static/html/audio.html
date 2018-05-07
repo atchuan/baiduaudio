@@ -30,7 +30,7 @@
   <h2>日志</h2>
   <pre id="log"></pre>
 
-  <script type="text/javascript" src="../js/HZRecorder.js"></script>
+  <script type="text/javascript" src="../js/HZRecorder.js?date=new Date()"></script>
   <script>
   function __log(e, data) {
     log.innerHTML = e+" "+ (data || '') +"\n" + log.innerHTML;
@@ -148,7 +148,7 @@
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
       window.URL = window.URL || window.webkitURL;
       
-      audio_context = new AudioContext;
+      audio_context = new AudioContext();
       __log(navigator.getUserMedia ? '浏览器可用。' : '浏览器不可用!');
     } catch (e) {
       __log('在这个浏览器中没有网页音频支持！');

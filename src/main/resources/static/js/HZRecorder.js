@@ -8,11 +8,11 @@
 	var HZRecorder = function(stream, config) {
 		config = config || {};
 		config.sampleBits = config.sampleBits || 16; // 采样数位 8, 16
-		config.sampleRate = config.sampleRate || 16000; // 采样率(1/6 44100)
+		config.sampleRate = config.sampleRate || 8000; // 采样率(1/6 44100)
 
 		// 创建一个音频环境对象
-		audioContext = window.AudioContext || window.webkitAudioContext;
-		var context = new audioContext();
+		AudioContext = window.AudioContext || window.webkitAudioContext;
+		var context = new AudioContext();
 
 		// 将声音输入这个对像
 		var audioInput = context.createMediaStreamSource(stream);

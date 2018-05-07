@@ -47,7 +47,7 @@ public class AudioController {
              */
             options.put("dev_pid",language);
         }
-        return AudioClient.getInstace().asr(bytes,"pcm",16000,options).toString();
+        return AudioClient.getInstace().asr(bytes,"pcm",8000,options).toString();
     }
 
 
