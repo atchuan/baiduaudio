@@ -11,7 +11,7 @@
 		config.sampleRate = config.sampleRate || 8000; // 采样率(1/6 44100)
 
 		// 创建一个音频环境对象
-		AudioContext = window.AudioContext || window.webkitAudioContext;
+		window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		var context = new AudioContext();
 
 		// 将声音输入这个对像
@@ -232,8 +232,7 @@
 										break;
 									case 'NOT_SUPPORTED_ERROR':
 									case 'NotSupportedError':
-										HZRecorder
-												.throwError('<a href="http://www.it165.net/edu/ewl/" target="_blank" class="keylink">浏览器</a>不支持硬件设备。');
+										HZRecorder.throwError('<a href="http://www.it165.net/edu/ewl/" target="_blank" class="keylink">浏览器</a>不支持硬件设备。');
 										break;
 									case 'MANDATORY_UNSATISFIED_ERROR':
 									case 'MandatoryUnsatisfiedError':

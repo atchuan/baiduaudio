@@ -36,17 +36,9 @@
     log.innerHTML = e+" "+ (data || '') +"\n" + log.innerHTML;
   }
 
-  var audio_context;
   var recorder;
   //初始化设备
   function startUserMedia(stream) {
-    var input = audio_context.createMediaStreamSource(stream);
-    __log('媒体流已创建。');
-
-    // Uncomment if you want the audio to feedback directly
-    //input.connect(audio_context.destination);
-    //__log('Input connected to audio context destination.');
-  
     recorder = new HZRecorder(stream);
     __log('录音器初始化。');
   }
@@ -143,12 +135,7 @@
   //初始化设备
   window.onload = function init() {
     try {
-      // webkit shim
-      window.AudioContext = window.AudioContext || window.webkitAudioContext;
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-      window.URL = window.URL || window.webkitURL;
-      
-      audio_context = new AudioContext();
       __log(navigator.getUserMedia ? '浏览器可用。' : '浏览器不可用!');
     } catch (e) {
       __log('在这个浏览器中没有网页音频支持！');
